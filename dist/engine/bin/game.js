@@ -1,4 +1,4 @@
-import * as test from './dependencies.js'
+import * as utils from './dependencies.js'
 import * as globals from './globals.js'
 
 export class Game{
@@ -51,6 +51,10 @@ export class Game{
     }
 
     draw() {
+        
+        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.8)'
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
+
         for (const entity of this.entities) {
             entity.draw(this.ctx);
         };

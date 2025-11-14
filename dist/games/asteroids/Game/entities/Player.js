@@ -1,4 +1,7 @@
-class Player
+import { Projectile } from "./Projectile.js";
+import { Vector } from "../../../../engine/utils/geometry.js";
+
+export class Player
 {
 	constructor(x, y, size)
 	{
@@ -24,6 +27,13 @@ class Player
 		this.ly = 0;
 		this.dead = false;
 		this.deathCounter = 0;
+
+		this.lft = false;
+		this.rgt = false;
+		this.fwd = false;
+		this.sht = false;
+
+		this.score = 0;
 	}
 	
 	kill()
@@ -64,12 +74,29 @@ class Player
 		
 		this.acc.sum(vdis);
 		
-		
-		
 	}
 	
 	update(delta)
 	{
+		if (this.lft)
+		{
+			this.rotate(-0.1);
+		}
+		
+		if (this.rgt)
+		{
+			this.rotate(0.1);
+		}
+		
+		if (this.fwd)
+		{
+			this.forward(2);
+		}
+		
+		if (this.dead){
+			document.location.href = './../Init/index.html';
+		}
+
 		const aux = this.acc.clone();
 		aux.scale(delta);
 		

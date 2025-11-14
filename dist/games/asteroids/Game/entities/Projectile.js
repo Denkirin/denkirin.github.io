@@ -1,4 +1,4 @@
-class Projectile
+export class Projectile
 {
 	constructor(pos, dir, speed)
 	{
