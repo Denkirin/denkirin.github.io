@@ -1,6 +1,6 @@
-import {Game} from './game.js'
-import {Entity} from './entity.js'
-import { Vector } from './dependencies.js';
+import {Game} from './bin/game.js'
+import {Entity} from './bin/entity.js'
+import { Vector } from './bin/dependencies.js';
 
 viewport = document.getElementById('Viewport');
 let g = new Game(viewport, innerWidth, innerHeight);
