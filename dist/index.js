@@ -15,9 +15,11 @@ let stage = 0;
 let targetStage;
 let offtrans = 0;
 
+let oldTimestamp = 0;
+
 const tabs = ["PROJECTS", "ABOUT ME", "CONTACT"]
 const projects = ["ASTEROIDS", "MUKADE"]
-const project_refs = ["./../games/asteroids/Game/index.html", "./../games/mukade/index.html"]
+const project_refs = ["./games/asteroids/Game/index.html", "./games/mukade/index.html"]
 window.onload = init;
 
 class Particle {
