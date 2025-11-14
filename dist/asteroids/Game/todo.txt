@@ -1,5 +1,0 @@
-Player move OK
-player jump OK
-player hook
-obstacles
-colisionsd

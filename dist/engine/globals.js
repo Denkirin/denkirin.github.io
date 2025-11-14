@@ -1,0 +1,1 @@
+export const timeFactor = 1 / 100;

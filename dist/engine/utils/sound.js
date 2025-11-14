@@ -1,4 +1,4 @@
-class Oscillator
+export class Oscillator
 {
 	constructor()
 	{
