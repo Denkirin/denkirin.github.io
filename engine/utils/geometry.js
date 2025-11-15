@@ -11,6 +11,13 @@ export class Vector {
 		this.y = Math.sin(deg) * ox + Math.cos(deg) * oy
 	}
 
+	mimic(otherVector){
+
+		this.x = otherVector.x;
+		this.y = otherVector.y;
+
+	}
+
 	translate(x, y) {
 		this.x += x;
 		this.y += y;
@@ -50,6 +57,12 @@ export class Vector {
 		return (aux);
 	}
 
+	sumClone(dis) {
+		let aux = this.clone();
+		aux.sum(dis);
+		return (aux);
+	}
+
 	rotatePivot(deg, pos) {
 		this.translate(-pos.x, -pos.y);
 		this.rotate(deg);
@@ -70,6 +83,17 @@ export class Vector {
 		aux.sum(this);
 
 		return (aux.magnitude());
+	}
+
+	vecDistance(vec) {
+
+		let aux = new Vector(0,0);
+
+		aux.x = this.x - vec.x;
+		aux.y = this.y - vec.y;
+
+		return (aux);
+
 	}
 
 	distanceComp(x, y) {
@@ -149,6 +173,52 @@ export class Vector {
 	dot(vec) {
 		return (this.x * vec.x + this.y * vec.y);
 	}
+}
+
+export class Rect {
+	constructor(pos, size){
+		this.nw = new Vector(pos.x, pos.y);
+		this.ne = new Vector(pos.x + size.x, pos.y);
+		this.sw = new Vector(pos.x, pos.y + size.y);
+		this.se = new Vector(pos.x + size.x, pos.y + size.y);
+
+		this.left = pos.x;
+		this.right = pos.x + size.x;
+		this.top = pos.y;
+		this.bottom = pos.y + size.y;
+
+		this.size = size
+
+	}
+
+	overlap(otherSquare){
+		
+		return this.right >= otherSquare.left && this.left <= otherSquare.right && this.top <= otherSquare.bottom && this.bottom >= otherSquare.top;
+	}
+
+	transform(pos = this.nw, size = this.size){
+
+		let off = this
+
+		this.nw.x = pos.x;
+		this.nw.y = pos.y;
+
+		this.ne.x = pos.x + size.x;
+		this.ne.y = pos.y;
+
+		this.sw.x = pos.x;
+		this.sw.y = pos.y + size.y;
+		
+		this.se.x = pos.x + size.x;
+		this.se.y = pos.y + size.y;
+
+
+		this.left = pos.x;
+		this.right = pos.x + size.x;
+		this.top = pos.y;
+		this.bottom = pos.y + size.y;
+	}
+	
 }
 
 // FUNCTIONS

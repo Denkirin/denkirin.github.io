@@ -1,4 +1,4 @@
-import * as utils from './dependencies.js'
+import * as utils from '../dependencies.js'
 import * as globals from './globals.js'
 
 export class Game{
@@ -45,9 +45,23 @@ export class Game{
     }
 
     update(delta) {
+
+        let coliding = false;
+
         for (const entity of this.entities) {
-            entity.update(delta);
+            
+            coliding = entity.testState(delta,0,this.entities);
+            
+            if (!coliding){
+                entity.update(delta);
+            } else {
+                entity.vel.ortho()
+            }
+            
+            entity.hitbox.coliding = coliding;
+
         };
+
     }
 
     draw() {
