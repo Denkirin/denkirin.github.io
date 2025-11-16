@@ -51,6 +51,12 @@ export class Vector {
 		return (aux);
 	}
 
+	dotClone(vec) {
+		let aux = this.clone();
+		aux.dot(vec);
+		return (aux);
+	}
+
 	scaleClone(dis) {
 		let aux = this.clone();
 		aux.scale(dis);
@@ -173,10 +179,13 @@ export class Vector {
 	dot(vec) {
 		return (this.x * vec.x + this.y * vec.y);
 	}
+
+
 }
 
 export class Rect {
 	constructor(pos, size){
+
 		this.nw = new Vector(pos.x, pos.y);
 		this.ne = new Vector(pos.x + size.x, pos.y);
 		this.sw = new Vector(pos.x, pos.y + size.y);
@@ -188,7 +197,7 @@ export class Rect {
 		this.bottom = pos.y + size.y;
 
 		this.size = size
-
+		
 	}
 
 	overlap(otherSquare){
@@ -196,27 +205,21 @@ export class Rect {
 		return this.right >= otherSquare.left && this.left <= otherSquare.right && this.top <= otherSquare.bottom && this.bottom >= otherSquare.top;
 	}
 
-	transform(pos = this.nw, size = this.size){
+	transform(posOff = new Vector(0,0), sizeOff =  new Vector(0,0)){
 
-		let off = this
+		this.nw.sum(posOff);
+		this.ne.sum(posOff);
+		this.sw.sum(posOff);
+		this.se.sum(posOff);
+		console.log(sizeOff)
+		this.ne.sum(sizeOff.dotClone(new Vector(1,0)));
+		this.sw.sum(sizeOff.dotClone(new Vector(0,1)));
+		this.se.sum(sizeOff.dotClone(new Vector(1,1)));
 
-		this.nw.x = pos.x;
-		this.nw.y = pos.y;
-
-		this.ne.x = pos.x + size.x;
-		this.ne.y = pos.y;
-
-		this.sw.x = pos.x;
-		this.sw.y = pos.y + size.y;
-		
-		this.se.x = pos.x + size.x;
-		this.se.y = pos.y + size.y;
-
-
-		this.left = pos.x;
-		this.right = pos.x + size.x;
-		this.top = pos.y;
-		this.bottom = pos.y + size.y;
+		this.left = this.nw.x;
+		this.right = this.ne.x;
+		this.top = this.nw.y;
+		this.bottom = this.sw.y;
 	}
 	
 }

@@ -27,6 +27,7 @@ export class Player
 		this.ly = 0;
 		this.dead = false;
 		this.deathCounter = 0;
+		this.coliding = false;
 
 		this.lft = false;
 		this.rgt = false;
@@ -74,6 +75,10 @@ export class Player
 		
 		this.acc.sum(vdis);
 		
+	}
+
+	testState(delta, pos, entities){
+		return(false);
 	}
 	
 	update(delta)
@@ -254,6 +259,10 @@ export class Player
 		{
 			projectile.draw(ctx);
 		});
+		
+	}
+
+	colide(){
 		
 	}
 }

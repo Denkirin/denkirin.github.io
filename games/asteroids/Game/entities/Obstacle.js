@@ -1,3 +1,5 @@
+import {Hitbox} from '../../../../engine/utils/hitbox.js'
+
 export class Obstacle
 {
 	constructor(pos, dir, weight)
@@ -8,6 +10,8 @@ export class Obstacle
 		
 		this.dir.normalize();
 		this.dead = false; 
+		this.coliding = false;
+		this.hitbox = new Hitbox(pos, 10)
 	}
 	
 	kill(dir)
@@ -41,6 +45,10 @@ export class Obstacle
 			
 			return(copy);
 		}		
+	}
+
+	testState(delta, pos, entities){
+		return(false);
 	}
 	
 	update(delta)

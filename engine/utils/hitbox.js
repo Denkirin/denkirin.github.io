@@ -10,8 +10,9 @@ export class Hitbox{
 
     }
 
-    update(delta, pos = this.pos, size = this.size){
-        this.bounds.transform(pos, size);
+    update(delta, posDelta){
+
+        this.bounds.transform(posDelta);
 
     }
 
@@ -26,16 +27,16 @@ export class Hitbox{
 
     }
 
-    testColision(newPos, otherHitbox){
+    testColision(posDelta, otherHitbox){
+
         if (otherHitbox == this) return(false);
 
-        let record = this.bounds.nw.clone()
         let ret = false;
         
-        this.bounds.transform(newPos);
+        this.bounds.transform(posDelta);
         ret = this.bounds.overlap(otherHitbox.bounds);
 
-        this.bounds.transform(record);
+        this.bounds.transform(posDelta.rotate(180));
 
         return(ret);
 

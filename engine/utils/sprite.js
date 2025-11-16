@@ -1,5 +1,5 @@
-export class SpriteManager{
-    constructor(path, posx, posy, sizex, sizey, numx, numy, index = 0, speed = 2,  scale = 4){
+export class Sprite {
+    constructor(path, pos, posx, posy, sizex, sizey, numx, numy, index = 0, speed = 2,  scale = 4){
         
         this.posx = posx;
         this.posy = posy;
@@ -23,28 +23,32 @@ export class SpriteManager{
 
         this.img.src = path;
 
-        this.tsCount = 0
-        this.spriteChanged = false;
-        
-        this.cnt = 0;
+        this.pos = pos;
     }
 
-    update(delta){
-        this.tsCount += delta;
-        this.spriteChanged = false;
+    update(delta, posDelta){
 
-        if (this.tsCount >= this.speed){
-            this.index = ( this.index + 1 ) % ( this.numx * this.numy );
-            this.tsCount -= this.speed;
-            this.spriteChanged = true;
-        }
+        this.pos.sum(posDelta);
+
     }
 
     draw(ctx, position){
         let px = this.posx + (this.index % this.numx) * this.sWidth;
         let py = this.posy + Math.floor(this.index / this.numx) * this.sHeight;
         
-        ctx.drawImage(this.img, px, py, this.sWidth, this.sHeight, position.x, position.y, this.sWidth * this.scale, this.sHeight * this.scale);
+        ctx.drawImage(this.img, px, py, this.sWidth, this.sHeight, this.pos.x, this.pos.y, this.sWidth * this.scale, this.sHeight * this.scale);
+    }
+
+    next(){
+
+        this.index = (this.index + 1) % (this.numx * this.numy);
+
+    }
+
+    reset(){
+
+        this.index = 0;
+
     }
 
 }

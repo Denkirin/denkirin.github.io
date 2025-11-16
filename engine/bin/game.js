@@ -49,16 +49,15 @@ export class Game{
         let coliding = false;
 
         for (const entity of this.entities) {
-            
             coliding = entity.testState(delta,0,this.entities);
-            
+
             if (!coliding){
                 entity.update(delta);
             } else {
                 entity.vel.ortho()
             }
             
-            entity.hitbox.coliding = coliding;
+            entity.colide();
 
         };
 
@@ -66,7 +65,7 @@ export class Game{
 
     draw() {
         
-        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.8)'
+        this.ctx.fillStyle = 'rgba(255, 255, 255, 1)'
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
 
         for (const entity of this.entities) {

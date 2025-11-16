@@ -1,5 +1,4 @@
-import * as globals from '../../../engine/bin/globals.js'
-import * as utils from '../../../engine/bin/dependencies.js'
+
 import * as engine from '../../../engine/bin/game.js'
 import * as entities from './entities/loader.js'
 
@@ -13,7 +12,6 @@ let shotCount = 0;
 
 viewport = document.getElementById('Viewport');
 let game = new engine.Game(viewport, innerWidth, innerHeight);
-console.log(entities)
 
 let player = new entities.Player(innerWidth/2, innerHeight/2, 20);
 let obsManager = new entities.ObstacleManager(1,100,player)

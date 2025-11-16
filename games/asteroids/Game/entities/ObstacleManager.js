@@ -12,8 +12,12 @@ export class ObstacleManager{
 
         this.osci = new Oscillator();
 
-    }
+		this.coliding = false;
 
+    }
+    testState(delta, pos, entities){
+		return(false);
+	}
     update(delta){
 
         for (const obs of this.obstacles) {
@@ -53,6 +57,10 @@ export class ObstacleManager{
         });
         
         this.obstacles = this.obstacles.filter((obs) => !obs.dead);
+        
+    }
+
+    colide(){
         
     }
 
