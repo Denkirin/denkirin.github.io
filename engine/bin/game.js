@@ -54,10 +54,10 @@ export class Game{
             if (!coliding){
                 entity.update(delta);
             } else {
-                entity.vel.ortho()
+                
             }
             
-            entity.colide();
+            //entity.colide();
 
         };
 

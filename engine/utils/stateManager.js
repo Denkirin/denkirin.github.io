@@ -28,10 +28,10 @@ export class StateManager {
 
     }
 
-    draw(ctx){
+    draw(ctx, pos){
         
-        this.sprites[this.state].draw(ctx);
-        this.hitboxes[this.state].draw(ctx);
+        this.sprites[this.state].draw(ctx, pos);
+        this.hitboxes[this.state].draw(ctx, pos);
 
     }
 
@@ -56,6 +56,12 @@ export class StateManager {
     getHitbox(){
 
         return(this.hitboxes[this.state].getHitbox());
+
+    }
+
+    getSprite(){
+
+        return(this.sprites[this.state]);
 
     }
 

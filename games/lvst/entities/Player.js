@@ -6,8 +6,9 @@ export class Player
 	constructor(pos, stateManager)
 	{
 		this.pos = pos;
-		this.guard = 1; //0 - low, 1 - mid, 2 - hig
+		this.guard = 'mid'; //0 - low, 1 - mid, 2 - hig
 		this.stateManager = stateManager;
+		this.direction = 1;
 
 		this.state = 'idle';
 	}
@@ -21,8 +22,17 @@ export class Player
 	
 	draw(ctx, offX, offY)
 	{
+		this.stateManager.draw(ctx, this.pos);
 
-		this.stateManager.update(delta);
+	}
 
+	testState(delta, newPos, otherEntities){
+
+		return(true);
+
+	}
+
+	changeGuard(guard){
+		this.guard = guard;
 	}
 }

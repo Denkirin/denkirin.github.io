@@ -36,7 +36,7 @@ export class Sprite {
         let px = this.posx + (this.index % this.numx) * this.sWidth;
         let py = this.posy + Math.floor(this.index / this.numx) * this.sHeight;
         
-        ctx.drawImage(this.img, px, py, this.sWidth, this.sHeight, this.pos.x, this.pos.y, this.sWidth * this.scale, this.sHeight * this.scale);
+        ctx.drawImage(this.img, px, py, this.sWidth, this.sHeight, position.x, position.x, this.sWidth * this.scale, this.sHeight * this.scale);
     }
 
     next(){

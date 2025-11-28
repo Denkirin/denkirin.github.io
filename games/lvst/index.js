@@ -20,10 +20,10 @@ let game = new engine.Game(viewport, innerWidth, innerHeight);
 
 let playerIdle = new Sprite('./src/spritesheet.png', new Vector(0, 0), 0, 0, 64, 64, 1, 1)
 let playerDefDown = new Sprite('./src/spritesheet.png', new Vector(0, 0), 64, 0, 64, 64, 1, 1)
-let playerDefUp = new Sprite('./src/spritesheet.png', new Vector(0, 0), 0, 128, 64, 64, 1, 1)
-let playerAttMid = new Sprite('./src/spritesheet.png', new Vector(0, 0), 64, 0, 64, 64, 1, 1)
+let playerDefUp = new Sprite('./src/spritesheet.png', new Vector(0, 0), 128, 0, 64, 64, 1, 1)
+let playerAttMid = new Sprite('./src/spritesheet.png', new Vector(0, 0), 0, 64, 64, 64, 1, 1)
 let playerAttUp = new Sprite('./src/spritesheet.png', new Vector(0, 0), 64, 64, 64, 64, 1, 1)
-let playerAttDown = new Sprite('./src/spritesheet.png', new Vector(0, 0), 64, 128, 64, 64, 1, 1)
+let playerAttDown = new Sprite('./src/spritesheet.png', new Vector(0, 0), 128, 64, 64, 64, 1, 1)
 
 let playerBoxes = new Hitbox(new Vector(0, 0), new Vector(64*4, 64*4),true);
 let playerHitboxes = new HitboxManager([playerBoxes])
@@ -47,27 +47,45 @@ let hitboxes1 = {
 
 let playerManager = new StateManager(sprites1, hitboxes1);
 
-let player = new entities.Player(new Vector(innerWidth/2, innerHeight/2),);
+let player = new entities.Player(new Vector(0,0), playerManager);
+let enemy = new entities.Player(new Vector(innerWidth/2, 0), playerManager);
 
-game.add_entity(player)
+enemy.direction = -1
+
+game.add_entity(player);
+game.add_entity(enemy);
 
 window.onload = ()=>game.init();
 
 addEventListener('keydown',() => {
 	
-	if (event.keyCode == 90)
+	if (event.keyCode == 38)
 	{
-		player.fwd = true;
+		player.stateManager.changeState('defU');
+		player.changeGuard('up');
 	}
 	
-	if (event.keyCode == 37)
+	if (event.keyCode == 40)
 	{
-		player.lft = true;
+		player.stateManager.changeState('defD');
+		player.changeGuard('down');
+
 	}
 	
-	if (event.keyCode == 39)
+	if (event.keyCode == 65)
 	{
-		player.rgt = true;
+		switch (player.guard){
+			case 'up':
+				player.stateManager.changeState('attU');
+				break;
+			case 'down':
+				player.stateManager.changeState('attD');
+				break;
+			default:
+				player.stateManager.changeState('attM');
+				break;
+
+		}
 	}
 
 	if (event.keyCode == 88)
@@ -85,19 +103,32 @@ addEventListener('keydown',() => {
 
 addEventListener('keyup',() => {
 	
-	if (event.keyCode == 90)
+	if (event.keyCode == 38)
 	{
-		player.fwd = false;
+		player.stateManager.changeState('idle');
+		player.changeGuard('mid');
 	}
 	
-	if (event.keyCode == 37)
+	if (event.keyCode == 40)
 	{
-		player.lft = false;
+		player.stateManager.changeState('idle');
+		player.changeGuard('mid');
 	}
 
-	if (event.keyCode == 39)
+	if (event.keyCode == 65)
 	{
-		player.rgt = false;
+		switch (player.guard){
+			case 'up':
+				player.stateManager.changeState('defU');
+				break;
+			case 'down':
+				player.stateManager.changeState('defD');
+				break;
+			default:
+				player.stateManager.changeState('idle');
+				break;
+
+		}
 	}
 	
 	if (event.keyCode == 88)
